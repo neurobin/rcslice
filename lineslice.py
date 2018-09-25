@@ -21,16 +21,16 @@ class LineSlice(object):
         """Convert 1 index to zero index"""
         if idx is not None:
             idx = idx - 1
-        if idx < 0:
-            idx = None
+            if idx < 0:
+                idx = 0
         return idx
     
     def get_two_less_index(self, idx):
         """subtract 2 from index """
         if idx is not None:
             idx = idx - 2
-        if idx < 0:
-            idx = None
+            if idx < 0:
+                idx = 0
         return idx
     
     def parse_slice_string(self, slice_string):
@@ -51,7 +51,6 @@ class LineSlice(object):
                 return [None, None]
             if len(lns) > 2:
                 raise ValueError("Unknown Line/Column number/range (%s) passed in line slice syntax %s" % (n, slice_string,))
-            print(lns)
             lns = [int(x) if x else None for x in lns]
             for i in lns:
                 if i <= 0 and i is not None:
@@ -69,7 +68,6 @@ class LineSlice(object):
                 if len(l) > 2:
                     raise ValueError("Unknown Line/Column number/range (%s) passed in line slice syntax %s" % (r, slice_string,))
                 l = [x if x else None for x in l]
-                print(l)
                 if len(l) == 1:
                     lns = get_lns_or_lne(l[0])
                     lne = [lns[0], None]
@@ -83,7 +81,7 @@ class LineSlice(object):
                     lne = get_lns_or_lne(l[1])
                     
                     lstep = 1 if lns[0] <= lne[0] or lne[0] is None else -1
-                    cstep = -1 if lns[0] == lne[0] and lne[1] < lns[1] and lne[1] is not None else 1
+                    cstep = 1 if lns[1] <= lne[1] or lne[1] is None else -1
                     
                     lns = [self.get_zero_index_from_one_index(x) for x in lns]
                     # end index is exclusive, we don't need to do -1
@@ -92,13 +90,14 @@ class LineSlice(object):
                     if lstep < 0:
                         # negative step, we need to do -2 for end index
                         lne[0] = self.get_two_less_index(lne[0])
-                    if cstep < 0:
-                        # negative step, we need to do -2 for end index
-                        lne[1] = self.get_two_less_index(lne[1])
+                    # ~ if cstep < 0:
+                        # ~ # negative step, we need to do -2 for end index
+                        # ~ lne[1] = self.get_two_less_index(lne[1])
                         
                     ll.append([lns, lne, [lstep, cstep]])
                 else:
                     raise ValueError("Unknown Line/Column number/range (%s) passed in line slice syntax %s" % (r, slice_string,))
+        print(ll)
         return ll
         
     def slice_list_of_sliceables(self, sliceables, slice_string):
@@ -120,15 +119,24 @@ class LineSlice(object):
             c = c + 1
             now_slice = sliceables[start[0]:end[0]:step[0]]
             if now_slice:
-                if now_slice[0] is now_slice[-1]:
-                    now_slice[0] = now_slice[0][start[1]:end[1]:step[1]]
+                if len(now_slice) == 1:
+                    cstep = 1 if start[1] <= end[1] or end[1] is None else -1
+                    if cstep < 0:
+                        # negative step, we need to do -2 for end index
+                        end[1] = self.get_two_less_index(end[1])
+                    now_slice[0] = now_slice[0][start[1]:end[1]:cstep]
                 else:
-                    now_slice[0] = now_slice[0][start[1]:]
-                    now_slice[-1] = now_slice[-1][:end[1]]
-            print(now_slice, start[0], end[0])
+                    if start[0] is None and end[0] is None:
+                        cstep = 1 if start[1] <= end[1] or end[1] is None else -1
+                        if cstep < 0:
+                            # negative step, we need to do -2 for end index
+                            end[1] = self.get_two_less_index(end[1])
+                        for i in xrange(len(now_slice)):
+                            now_slice[i] = now_slice[i][start[1]:end[1]:cstep]
+                    else:
+                        now_slice[0] = now_slice[0][start[1]:]
+                        now_slice[-1] = now_slice[-1][:end[1]]
             new_sliceables.extend(now_slice)
-            print(new_sliceables)
-            # ~ print(sidx)
         
         return new_sliceables if new_sliceables else sliceables
 

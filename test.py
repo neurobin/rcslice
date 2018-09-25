@@ -3,7 +3,6 @@ from lineslice import LineSlice
 
 ls = LineSlice()
 
-ll = ls.parse_slice_string('3.4-1.2')
 
 textl = [
             'This is line 1',
@@ -17,4 +16,4 @@ textl = [
             'This is line 9',
         ]
 
-print(ls.slice_list_of_sliceables(textl, '3.7-3.1'))
+print(ls.slice_list_of_sliceables(textl, '2-1'))
