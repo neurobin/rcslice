@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/neurobin/rcslice.svg?branch=release)](https://travis-ci.org/neurobin/rcslice)
 
 
-Python module to slice a list of sliceables (1 indexed, both start and end index are inclusive). Helps to slice file content line by line or column by column or a combination of them.
+Python module to slice a list of sliceables (1 indexed, both start and end index are inclusive). Helps to slice file content line by line or column by column or a combination of both.
 
 # Install
 
@@ -24,7 +24,7 @@ list_of_sliceables = rs.slice_list_of_sliceables(list_of_sliceables, slice_strin
 
 # Slicing syntax
 
-Below r is the row number (inclusive, 1 indexed), and c is the column number (inclusive, 1 indexed)
+Below, r is the row number (inclusive, 1 indexed), and c is the column number (inclusive, 1 indexed)
 
     r.c-r.c
     r.c-r.c,r.c-r.c,...
@@ -35,7 +35,7 @@ Below r is the row number (inclusive, 1 indexed), and c is the column number (in
             
 
 
-Reversion row wise or column wise or a mix of two are allowed.
+Reversion, row wise or column wise or a mix of two are allowed.
 
         
 
