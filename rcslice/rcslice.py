@@ -1,4 +1,7 @@
-"""rcslice module
+"""
+==================================================================
+                    rcslice module
+==================================================================
 
 See <https://github.com/neurobin/rcslice> for documentation.
 
