@@ -56,6 +56,7 @@ class RowSlice(object):
             .c-.c       [not specifying both r means slice on every row for the columns]
             1.c-.c      [not specifying r means the last row when another r is specified]
             .c-1        [last row.c to first row, reversion]
+            r           [only r'th row]
             
 
         Reversion row wise or column wise or a mix of two are allowed.

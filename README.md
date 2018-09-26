@@ -30,14 +30,22 @@ Below, r is the row number (inclusive, 1 indexed), and c is the column number (i
     r.c-r.c,r.c-r.c,...
     r-r         [not specifying c means the last c (always)]
     .c-.c       [not specifying both r means slice on every row for the columns]
-    1.c-.c      [not specifying r means the last row when another r is specified]
-    .c-1        [last row.c to first row, reversion]
+    r.c-.c      [not specifying r means the last row when another r is specified]
+    .c-r        [last row.c to r'th row, reversion]
+    r           [only r'th row]
             
 
 
 Reversion, row wise or column wise or a mix of two are allowed.
 
-        
+For multiple slice syntax `r.c-r.c,r.c-r.c,...`, a separator will be inserted between each slice. You can set the separator by passing it during class object instantiation:
+
+```python
+rs = RowSlice(['I am a separator'])
+```
+
+This separator is essentially a list of sliceables.
+
 
 # Examples
 
