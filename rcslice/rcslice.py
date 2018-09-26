@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """rcslice module
 
 See <https://github.com/neurobin/rcslice> for documentation.
@@ -17,8 +16,8 @@ class RowSlice(object):
     def __init__(self, row_slice_separator=[]):
         """
         
-        Parameter
-        ---------
+        Parameters
+        ----------
         
         row_slice_separator    A list of entities that will be inserted between two adjacent single operation slice (e.g between 2-3 and 4-5 in 2-3,4-5 slice syntax)
         

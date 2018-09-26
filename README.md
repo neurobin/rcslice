@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/neurobin/rcslice.svg?branch=release)](https://travis-ci.org/neurobin/rcslice)
 
 
-Python module to slice a list of sliceables (1 indexed, both start and end index are inclusive). Helps to slice file content line by line or column by column or a combination of both.
+This package provides Python module to slice a list of sliceables (1 indexed, both start and end index are inclusive). Helps to slice file content line by line or column by column or a combination of both.
 
 # Install
 
