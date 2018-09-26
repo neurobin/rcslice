@@ -4,7 +4,7 @@ import unittest
 from rcslice import RowSlice
 
 
-LOGGER_NAME = 'mdx_include_test'
+LOGGER_NAME = 'rcslice'
 log = logging.getLogger(LOGGER_NAME)
 
 def get_file_content(path):
