@@ -4,7 +4,7 @@ import unittest
 from rcslice import RowSlice
 
 
-LOGGER_NAME = 'rcslice'
+LOGGER_NAME = 'rcslice-'
 log = logging.getLogger(LOGGER_NAME)
 
 def get_file_content(path):
