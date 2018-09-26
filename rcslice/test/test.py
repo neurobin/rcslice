@@ -1,5 +1,5 @@
 
-from rcslice.rcslice import RowSlice
+from rcslice import RowSlice
 
 ls = RowSlice(['I am a separator'])
 
@@ -27,9 +27,9 @@ lst = []
 # ~ # the result is everything unmodified
 # ~ lst.append(ls.slice_list_of_sliceables(textl, '.1-.'))
 
-# From the beginning of everything to the end of everything (inefficient no slice, use '' instead)
-# the result is everything unmodified
-lst.append(ls.slice_list_of_sliceables(textl, '1.1-.'))
+# ~ # From the beginning of everything to the end of everything (inefficient no slice, use '' instead)
+# ~ # the result is everything unmodified
+# ~ lst.append(ls.slice_list_of_sliceables(textl, '1.1-.'))
 
 # ~ # From the beginning of first child to the 3rd element of last child
 # ~ lst.append(ls.slice_list_of_sliceables(textl, '1.1-.3'))
