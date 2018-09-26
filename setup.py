@@ -5,7 +5,7 @@ import sys
 from codecs import open
 from setuptools import setup
 
-sys.path[0:0] = ['mdx_include']
+sys.path[0:0] = ['rcslice']
 
 from version import __version__
 
@@ -18,15 +18,15 @@ def get_readme(filename):
         pass
     return content
 
-setup(name="mdx_include",
+setup(name="rcslice",
       version=__version__,
       author="Md. Jahidul Hamid",
       author_email="jahidulhamid@yahoo.com",
-      description="Python Markdown extension to include local or remote files",
+      description="Python module to slice a list of sliceables (1 indexed, start and end index both are inclusive) ",
       license="BSD",
-      keywords="markdown include local remote file",
-      url="https://github.com/neurobin/mdx_include",
-      packages=["mdx_include"],
+      keywords="slice list sliceable line slice from file",
+      url="https://github.com/neurobin/rcslice",
+      packages=["rcslice"],
       long_description=get_readme("README.md"),
       long_description_content_type="text/markdown",
       classifiers=[
@@ -40,7 +40,6 @@ setup(name="mdx_include",
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
         'Topic :: Text Processing :: Filters',
-        'Topic :: Text Processing :: Markup',
       ],
-      install_requires=["Markdown>=2.6",],
-test_suite="mdx_include.test.test")
+      install_requires=[],
+test_suite="rcslice.test.test")
