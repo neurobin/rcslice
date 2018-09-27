@@ -24,19 +24,26 @@ list_of_sliceables = rs.slice_list_of_sliceables(list_of_sliceables, slice_strin
 
 # Slicing syntax
 
-Below, r is the row number (inclusive, 1 indexed), and c is the column number (inclusive, 1 indexed)
+Below, r is the row number, and c is the column number. All indexes are inclusive and 1 indexed.
 
     r.c-r.c
     r.c-r.c,r.c-r.c,...
-    r-r         [not specifying c means the last c (always)]
     .c-.c       [not specifying both r means slice on every row for the columns]
-    r.c-.c      [not specifying r means the last row when another r is specified]
-    .c-r        [last row.c to r'th row, reversion]
+    1.c-.c      [not specifying r means the last row when another r is specified]
+    .c-1        [last row.c to first row, reversion]
     r           [only r'th row]
-            
-
-
-Reversion, row wise or column wise or a mix of two are allowed.
+    r1-r2       [when both r is not the same, not specifying c means the first c for start index and last c for end index]
+    r1-r2.c     [first c of r1 to r2.c]
+    r1.c-r2     [r1.c to last c of r2]
+    r-r.c       [when both r is the same, not specifying one c will mean the last c]
+    r-r         [when both r is the same, not specifying both c means the first c for start index and last c for end index]
+    e.c-e.c     [e means last row]
+    e-e         [last row]
+    e-e.c       [last c of e to e.c]
+    e.c-e       [e.c to last c of e]
+    e.e-e.e     [same as e-e, e in column is stripped off]
+    
+The e to specify the last row is exclusively for row only. Do keep in mind that the class name is RowSlice. It gives special priority on row and not just with the special character e. You will see some major difference in how r and c works in above syntax explanation.
 
 For multiple slice syntax `r.c-r.c,r.c-r.c,...`, a separator will be inserted between each slice. You can set the separator by passing it during class object instantiation:
 

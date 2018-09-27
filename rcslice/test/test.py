@@ -66,7 +66,7 @@ class TestMethods(unittest.TestCase):
         # Column slice; slice from 2nd element to 8th element on every child
         lst.append(ls.slice_list_of_sliceables(textl, '.2-.8'))
 
-        # # Column slice + reversion; slice from 8nd element to 2nd element on every child
+        # # Column slice + reversion; slice from 8th element to 2nd element on every child
         lst.append(ls.slice_list_of_sliceables(textl, '.8-.2'))
 
         # From 8th element of last child to 2nd element of 2nd line
@@ -126,6 +126,53 @@ class TestMethods(unittest.TestCase):
         lsts = str(lst)
         # ~ print(lsts)
         self.assertEqual(lsts, get_file_content('rcslice/test/out1.txt').strip())
+        
+    def test_e(self):
+        ls = RowSlice(['I am a separator'])
+
+
+        textl = [
+                    'This is line 1',
+                    'This is line 2',
+                    'This is line 3',
+                    'This is line 4',
+                    'This is line 5',
+                    'This is line 6',
+                    'This is line 7',
+                    'This is line 8',
+                    'This is line 9',
+                ]
+        lst = []
+        
+        # First row to 4th row
+        lst.append(ls.slice_list_of_sliceables(textl, '1-4'))
+        
+        # First row to 3rd element of 4th child
+        lst.append(ls.slice_list_of_sliceables(textl, '1.-4.3'))
+        
+        # last element of 4th child to 5th element of 4th child
+        lst.append(ls.slice_list_of_sliceables(textl, '4.-4.5'))
+        
+        # last element of 4th child to 5th element of 4th child
+        lst.append(ls.slice_list_of_sliceables(textl, '4-4.5'))
+        
+        # last child
+        lst.append(ls.slice_list_of_sliceables(textl, 'e-e'))
+        
+        # last child
+        lst.append(ls.slice_list_of_sliceables(textl, 'e.e-e.e'))
+        
+        # last child
+        lst.append(ls.slice_list_of_sliceables(textl, 'e.3-e.'))
+        
+        # 3rd element of last child to last eleemnt of last child
+        lst.append(ls.slice_list_of_sliceables(textl, 'e.3-.'))
+        
+        
+        lsts = str(lst)
+        
+        # ~ print(lsts)
+        self.assertEqual(lsts, get_file_content('rcslice/test/oute.txt').strip())
 
 if __name__ == "__main__":
     unittest.main()

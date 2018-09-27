@@ -49,20 +49,27 @@ class RowSlice(object):
     def parse_slice_string(self, slice_string):
         """Parse slice string and return a list of lists.
         
+        Below, r is the row number, and c is the column number. All indexes are inclusive and 1 indexed.
+        
         Slice string syntax:
             r.c-r.c
             r.c-r.c,r.c-r.c,...
-            r-r         [not specifying c means the last c (always)]
             .c-.c       [not specifying both r means slice on every row for the columns]
             1.c-.c      [not specifying r means the last row when another r is specified]
             .c-1        [last row.c to first row, reversion]
             r           [only r'th row]
+            r1-r2       [when both r is not the same, not specifying c means the first c for start index and last c for end index]
+            r1-r2.c     [first c of r1 to r2.c]
+            r1.c-r2     [r1.c to last c of r2]
+            r-r.c       [when both r is the same, not specifying one c will mean the last c]
+            r-r         [when both r is the same, not specifying both c means the first c for start index and last c for end index]
+            e.c-e.c     [e means last row]
+            e-e         [last row]
+            e-e.c       [last c of e to e.c]
+            e.c-e       [e.c to last c of e]
+            e.e-e.e     [same as e-e, e in column is stripped off]
             
-
-        Reversion row wise or column wise or a mix of two are allowed.
-
-        where r is the row number (inclusive, 1 indexed), 
-        and c is the column number (inclusive, 1 indexed)
+        The e to specify the last row is exclusively for row only. Do keep in mind that the class name is RowSlice. It gives special priority on row and not just with the special character e. You will see some major difference in how r and c works in above syntax explanation.
         
         Returned List format:
 
@@ -70,7 +77,7 @@ class RowSlice(object):
                 [[start.r, start.c], [end.r, end.c], [rstep, cstep, column_sliceable]]
             ]
             
-            column_sliceable is generally None, when it's False, it means column-slice-only should not be done 
+            column_sliceable is generally None, when it's False, it means column-slice-only should not be done.
         
         """
         def get_lns_or_lne(n):
@@ -134,7 +141,11 @@ class RowSlice(object):
     def slice_list_of_sliceables(self, sliceables, slice_string):
         """Take slices of sliceables by slice string (e.g 1,1-4,1.2-4.7,7.8-1.5 etc.)
         """
-        if sliceables:
+        e = len(sliceables)
+        if e > 0 and slice_string:
+            # convert e to end index
+            slice_string = slice_string.replace('.e', '.')
+            slice_string = slice_string.replace('e', '{}'.format(e))
             sidxs = self.parse_slice_string(slice_string)
             c = 0
             new_sliceables = []
