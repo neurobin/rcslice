@@ -18,7 +18,7 @@ from rcslice import RowSlice
 
 rs = RowSlice()
 
-list_of_sliceables = rs.slice_list_of_sliceables(list_of_sliceables, slice_string)
+list_of_sliceables = rs.slice_list_of_sliceables(list_of_sliceables, '1-2,2.4-4.5,8-2.6')
 
 ```
 
