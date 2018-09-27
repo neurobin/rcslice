@@ -51,7 +51,7 @@ For multiple slice syntax `r.c-r.c,r.c-r.c,...`, a separator will be inserted be
 rs = RowSlice(['I am a separator'])
 ```
 
-This separator is essentially a list of sliceables.
+This separator is also a **list** of something.
 
 
 # Examples
