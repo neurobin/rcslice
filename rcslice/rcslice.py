@@ -138,7 +138,7 @@ class RowSlice(object):
                     raise ValueError(self.__common_value_error_format % (r, slice_string,))
         return ll
         
-    def slice_list_of_sliceables(self, sliceables, slice_string):
+    def slice(self, sliceables, slice_string):
         """Take slices of sliceables by slice string (e.g 1,1-4,1.2-4.7,7.8-1.5 etc.)
         """
         e = len(sliceables)

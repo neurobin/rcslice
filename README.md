@@ -18,7 +18,7 @@ from rcslice import RowSlice
 
 rs = RowSlice()
 
-list_of_sliceables = rs.slice_list_of_sliceables(list_of_sliceables, '1-2,2.4-4.5,8-2.6')
+list_of_sliceables = rs.slice(list_of_sliceables, '1-2,2.4-4.5,8-2.6')
 
 ```
 
@@ -79,7 +79,7 @@ list_of_lines = get_file_lines('test.txt')
 
 print("before: ", list_of_lines)
 
-list_of_lines = rs.slice_list_of_sliceables(list_of_lines, '1-2,1.2-4.5,3.4-1.3,.4-.9')
+list_of_lines = rs.slice(list_of_lines, '1-2,1.2-4.5,3.4-1.3,.4-.9')
 
 print("after: ", list_of_lines)
 
